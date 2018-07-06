@@ -27,6 +27,9 @@
     <ClCompile Include="MediaCore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MediaCoreAPI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VCCompat.h">
@@ -44,7 +47,7 @@
     <ClInclude Include="BaseHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ffplay_base.h">
+    <ClInclude Include="MediaCoreAPI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

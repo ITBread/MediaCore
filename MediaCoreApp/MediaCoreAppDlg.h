@@ -3,7 +3,9 @@
 //
 
 #pragma once
+#include "../MediaCore/MediaCoreAPI.h"
 
+#pragma comment(lib, "MediaCore.lib")
 
 // CMediaCoreAppDlg 对话框
 class CMediaCoreAppDlg : public CDialog
@@ -20,6 +22,7 @@ public:
 
 private:
 		CMenu m_Menu;
+		MediaCoreAPI mediaCoreAPI;
 // 实现
 protected:
 	HICON m_hIcon;

@@ -17,7 +17,7 @@ extern "C" {
 #define __restrict__
 
 
-#include "config.h"
+#include "baseconfig.h"
 #include "VCCompat.h"
 #include <inttypes.h>
 #include <math.h>

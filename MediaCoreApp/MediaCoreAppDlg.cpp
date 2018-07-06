@@ -6,9 +6,6 @@
 #include "MediaCoreApp.h"
 #include "MediaCoreAppDlg.h"
 
-#include "../MediaCore/ffplay_base.h"
-
-#pragma comment(lib, "MediaCore.lib")
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -106,7 +103,7 @@ BOOL CMediaCoreAppDlg::OnInitDialog()
 	m_Menu.LoadMenu(IDR_MENU1);
 	SetMenu(&m_Menu);
 	// TODO: 在此添加额外的初始化代码
-	Init(m_hWnd);
+	mediaCoreAPI.Init(m_hWnd);
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -127,18 +124,18 @@ void CMediaCoreAppDlg::OnSysCommand(UINT nID, LPARAM lParam)
 void CMediaCoreAppDlg::OnPlaymenu()
 {
 	char *url="d:/rec/2.mkv";
-	StartFile(url);
+	mediaCoreAPI.StartPlay(url);
 }
 
 void CMediaCoreAppDlg::OnPlayStreammenu()
 {
 	char *url="rtsp://192.168.199.197/test.265";
-	StartFile(url);
+	mediaCoreAPI.StartPlay(url);
 }
 
 void CMediaCoreAppDlg::OnStopmenu()
 {
-
+	mediaCoreAPI.StopPlay();
 	this->Invalidate();
 }
 

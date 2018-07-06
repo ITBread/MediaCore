@@ -165,13 +165,14 @@
     <ClCompile Include="cmdutils.cpp" />
     <ClCompile Include="ffplay_base.cpp" />
     <ClCompile Include="MediaCore.cpp" />
+    <ClCompile Include="MediaCoreAPI.cpp" />
     <ClCompile Include="VCCompat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseHeader.h" />
     <ClInclude Include="cmdutils.h" />
-    <ClInclude Include="ffplay_base.h" />
     <ClInclude Include="MediaCore.h" />
+    <ClInclude Include="MediaCoreAPI.h" />
     <ClInclude Include="va_copy.h" />
     <ClInclude Include="VCCompat.h" />
   </ItemGroup>

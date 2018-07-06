@@ -28,11 +28,12 @@ extern "C" {
 
 #include <stdint.h>
 
-#include "config.h"
+#include "baseconfig.h"
 #include "libavcodec/avcodec.h"
 #include "libavfilter/avfilter.h"
 #include "libavformat/avformat.h"
 #include "libswscale/swscale.h"
+
 
 #ifdef _WIN32
 #undef main /* We don't want SDL to override our main() */
@@ -663,7 +664,7 @@ extern void *grow_array(void *array, int elem_size, int *size, int new_size);
 
 extern double get_rotation(AVStream *st);
 
-#ifdef __cplusplus
-	}
-#endif
 
+#ifdef __cplusplus
+}
+#endif

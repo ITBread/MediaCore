@@ -37,7 +37,7 @@ extern "C" {
    Studio) will not omit unused inline functions and create undefined
    references to libraries that are not being built. */
 
-#include "config.h"
+#include "baseconfig.h"
 #include "compat/va_copy.h"
 #include "libavformat/avformat.h"
 #include "libavfilter/avfilter.h"
