@@ -3552,8 +3552,7 @@ int MediaCore::StartPlay(const char* url)
 	input_filename=url;
 	Init_sdl();
 	stream_open(input_filename, file_iformat);
-
-	event_loop(this);
+	//event_loop(this);
 	return 0;
 }
 
@@ -3629,4 +3628,11 @@ void MediaCore::PreInit()
 	renderer=NULL;
 	memset(&renderer_info,sizeof(SDL_RendererInfo),0);
 	memset(&audio_dev,sizeof(SDL_AudioDeviceID),0);
+}
+
+void MediaCore::set_log_callback(log_callback cb)
+{
+	av_log_set_flags(AV_LOG_SKIP_REPEATED);
+	av_log_set_level(AV_LOG_VERBOSE);
+	av_log_set_callback(cb);
 }

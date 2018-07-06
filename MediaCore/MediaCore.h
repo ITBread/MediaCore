@@ -3,6 +3,8 @@
 #include "BaseHeader.h"
 #include <Windows.h>
 
+typedef void(*log_callback)(void*, int, const char*, va_list);
+
 class MediaCore
 {
 public:
@@ -11,6 +13,7 @@ public:
 
 public:
 	void PreInit();
+	void set_log_callback(log_callback cb);
 	void Init(void* hwnd);
 	void Init_sdl();
 	int StartPlay(const char* url);
