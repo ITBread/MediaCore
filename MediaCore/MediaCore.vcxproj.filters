@@ -18,9 +18,6 @@
     <ClCompile Include="VCCompat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cmdutils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ffplay_base.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -30,9 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VCCompat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cmdutils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="va_copy.h">
