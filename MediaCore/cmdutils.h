@@ -90,35 +90,35 @@ void log_callback_help(void* ptr, int level, const char* fmt, va_list vl);
 /**
  * Override the cpuflags.
  */
-int opt_cpuflags(void *optctx, const char *opt, const char *arg);
+//int opt_cpuflags(void *optctx, const char *opt, const char *arg);
 
 /**
  * Fallback for options that are not explicitly handled, these will be
  * parsed through AVOptions.
  */
-int opt_default(void *optctx, const char *opt, const char *arg);
+//int opt_default(void *optctx, const char *opt, const char *arg);
 
 /**
  * Set the libav* libraries log level.
  */
-int opt_loglevel(void *optctx, const char *opt, const char *arg);
-
-int opt_report(const char *opt);
-
-int opt_max_alloc(void *optctx, const char *opt, const char *arg);
-
-int opt_codec_debug(void *optctx, const char *opt, const char *arg);
-
-#if CONFIG_OPENCL
-int opt_opencl(void *optctx, const char *opt, const char *arg);
-
-int opt_opencl_bench(void *optctx, const char *opt, const char *arg);
-#endif
+//int opt_loglevel(void *optctx, const char *opt, const char *arg);
+//
+//int opt_report(const char *opt);
+//
+//int opt_max_alloc(void *optctx, const char *opt, const char *arg);
+//
+//int opt_codec_debug(void *optctx, const char *opt, const char *arg);
+//
+//#if CONFIG_OPENCL
+//int opt_opencl(void *optctx, const char *opt, const char *arg);
+//
+//int opt_opencl_bench(void *optctx, const char *opt, const char *arg);
+//#endif
 
 /**
  * Limit the execution time.
  */
-int opt_timelimit(void *optctx, const char *opt, const char *arg);
+//int opt_timelimit(void *optctx, const char *opt, const char *arg);
 
 /**
  * Parse a string and return its corresponding value as a double.
@@ -232,7 +232,7 @@ void show_help_options(const OptionDef *options, const char *msg, int req_flags,
 #define CMDUTILS_COMMON_OPTIONS_AVDEVICE
 #endif
 
-#define CMDUTILS_COMMON_OPTIONS                                                                                         \
+/*#define CMDUTILS_COMMON_OPTIONS                                                                                         \
     { "L",           OPT_EXIT,             { .func_arg = show_license },     "show license" },                          \
     { "h",           OPT_EXIT,             { .func_arg = show_help },        "show help", "topic" },                    \
     { "?",           OPT_EXIT,             { .func_arg = show_help },        "show help", "topic" },                    \
@@ -261,7 +261,7 @@ void show_help_options(const OptionDef *options, const char *msg, int req_flags,
     { "cpuflags",    HAS_ARG | OPT_EXPERT, { .func_arg = opt_cpuflags },     "force specific cpu flags", "flags" },     \
     { "hide_banner", OPT_BOOL | OPT_EXPERT, {&hide_banner},     "do not show program banner", "hide_banner" },          \
     CMDUTILS_COMMON_OPTIONS_OPENCL                                                                                      \
-    CMDUTILS_COMMON_OPTIONS_AVDEVICE                                                                                    \
+    CMDUTILS_COMMON_OPTIONS_AVDEVICE   */                                                                                 \
 
 /**
  * Show help for all options with given flags in class and all its
@@ -489,48 +489,48 @@ extern int show_buildconf(void *optctx, const char *opt, const char *arg);
  * the license of the libraries compiled into the program.
  * This option processing function does not utilize the arguments.
  */
-extern int show_license(void *optctx, const char *opt, const char *arg);
+//extern int show_license(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the formats supported by the
  * program (including devices).
  * This option processing function does not utilize the arguments.
  */
-extern int show_formats(void *optctx, const char *opt, const char *arg);
+//extern int show_formats(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the muxers supported by the
  * program (including devices).
  * This option processing function does not utilize the arguments.
  */
-extern int show_muxers(void *optctx, const char *opt, const char *arg);
+//extern int show_muxers(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the demuxer supported by the
  * program (including devices).
  * This option processing function does not utilize the arguments.
  */
-extern int show_demuxers(void *optctx, const char *opt, const char *arg);
+//extern int show_demuxers(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the devices supported by the
  * program.
  * This option processing function does not utilize the arguments.
  */
-extern int show_devices(void *optctx, const char *opt, const char *arg);
+//extern int show_devices(void *optctx, const char *opt, const char *arg);
 
 #if CONFIG_AVDEVICE
 /**
  * Print a listing containing autodetected sinks of the output device.
  * Device name with options may be passed as an argument to limit results.
  */
-extern int show_sinks(void *optctx, const char *opt, const char *arg);
+//extern int show_sinks(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing autodetected sources of the input device.
  * Device name with options may be passed as an argument to limit results.
  */
-extern int show_sources(void *optctx, const char *opt, const char *arg);
+//extern int show_sources(void *optctx, const char *opt, const char *arg);
 #endif
 
 /**
@@ -538,72 +538,72 @@ extern int show_sources(void *optctx, const char *opt, const char *arg);
  * program.
  * This option processing function does not utilize the arguments.
  */
-extern int show_codecs(void *optctx, const char *opt, const char *arg);
+//extern int show_codecs(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the decoders supported by the
  * program.
  */
-extern int show_decoders(void *optctx, const char *opt, const char *arg);
+//extern int show_decoders(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the encoders supported by the
  * program.
  */
-extern int show_encoders(void *optctx, const char *opt, const char *arg);
+//extern int show_encoders(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the filters supported by the
  * program.
  * This option processing function does not utilize the arguments.
  */
-extern int show_filters(void *optctx, const char *opt, const char *arg);
+//extern int show_filters(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the bit stream filters supported by the
  * program.
  * This option processing function does not utilize the arguments.
  */
-extern int show_bsfs(void *optctx, const char *opt, const char *arg);
+//extern int show_bsfs(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the protocols supported by the
  * program.
  * This option processing function does not utilize the arguments.
  */
-extern int show_protocols(void *optctx, const char *opt, const char *arg);
+//extern int show_protocols(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the pixel formats supported by the
  * program.
  * This option processing function does not utilize the arguments.
  */
-extern int show_pix_fmts(void *optctx, const char *opt, const char *arg);
+//extern int show_pix_fmts(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the standard channel layouts supported by
  * the program.
  * This option processing function does not utilize the arguments.
  */
-extern int show_layouts(void *optctx, const char *opt, const char *arg);
+//extern int show_layouts(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the sample formats supported by the
  * program.
  */
-extern int show_sample_fmts(void *optctx, const char *opt, const char *arg);
+//extern int show_sample_fmts(void *optctx, const char *opt, const char *arg);
 
 /**
  * Print a listing containing all the color names and values recognized
  * by the program.
  */
-extern int show_colors(void *optctx, const char *opt, const char *arg);
+//extern int show_colors(void *optctx, const char *opt, const char *arg);
 
 /**
  * Return a positive value if a line read from standard input
  * starts with [yY], otherwise return 0.
  */
-extern int read_yesno(void);
+//extern int read_yesno(void);
 
 /**
  * Get a file corresponding to a preset file.
@@ -623,8 +623,8 @@ extern int read_yesno(void);
  * @param codec_name name of the codec for which to look for the
  * preset, may be NULL
  */
-extern FILE *get_preset_file(char *filename, size_t filename_size,
-                      const char *preset_name, int is_path, const char *codec_name);
+//extern FILE *get_preset_file(char *filename, size_t filename_size,
+//                      const char *preset_name, int is_path, const char *codec_name);
 
 /**
  * Realloc array to hold new_size elements of elem_size.
