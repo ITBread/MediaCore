@@ -6,7 +6,7 @@
 #include "MediaCoreApp.h"
 #include "MediaCoreAppDlg.h"
 
-#include "../MediaCore/ffplay_base.h"
+#include "../MediaCore/MediaCoreAPI.h"
 
 #pragma comment(lib, "MediaCore.lib")
 #ifdef _DEBUG
