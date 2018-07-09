@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include "MediaCoreAPI.h"
+#include "MediaCore.h"
 #include "VCCompat.h"
 #include "BaseHeader.h"
 #include "cmdutils.h"
@@ -159,7 +160,7 @@ static int check_stream_specifier(AVFormatContext *s, AVStream *st, const char *
 	return ret;
 }
 
-AVDictionary *filter_codec_opts(AVDictionary *opts, enum AVCodecID codec_id,
+static AVDictionary *filter_codec_opts(AVDictionary *opts, enum AVCodecID codec_id,
 	AVFormatContext *s, AVStream *st, AVCodec *codec)
 {
 	AVDictionary    *ret = NULL;
@@ -216,7 +217,7 @@ AVDictionary *filter_codec_opts(AVDictionary *opts, enum AVCodecID codec_id,
 	return ret;
 }
 
-AVDictionary **setup_find_stream_info_opts(AVFormatContext *s,
+static  AVDictionary **setup_find_stream_info_opts(AVFormatContext *s,
 	AVDictionary *codec_opts)
 {
 	int i;
@@ -236,7 +237,7 @@ AVDictionary **setup_find_stream_info_opts(AVFormatContext *s,
 	return opts;
 }
 
-void *grow_array(void *array, int elem_size, int *size, int new_size)
+static  void *grow_array(void *array, int elem_size, int *size, int new_size)
 {
 	if (new_size >= INT_MAX / elem_size) {
 		av_log(NULL, AV_LOG_ERROR, "Array too big.\n");
@@ -255,7 +256,7 @@ void *grow_array(void *array, int elem_size, int *size, int new_size)
 	return array;
 }
 
-double get_rotation(AVStream *st)
+static  double get_rotation(AVStream *st)
 {
 	uint8_t* displaymatrix = av_stream_get_side_data(st,
 		AV_PKT_DATA_DISPLAYMATRIX, NULL);
@@ -307,16 +308,6 @@ static void print_error(const char *filename, int err)
 	av_log(NULL, AV_LOG_ERROR, "%s: %s\n", filename, errbuf_ptr);
 }
 
-
-#if CONFIG_AVFILTER
-static int opt_add_vfilter(void *optctx, const char *opt, const char *arg)
-{
-    //GROW_ARRAY(vfilters_list, nb_vfilters);
-	 //vfilters_list[nb_vfilters - 1] = arg;
- 
-    return 0;
-}
-#endif
 
 static inline
 int cmp_audio_fmts(enum AVSampleFormat fmt1, int64_t channel_count1,
@@ -3723,3 +3714,140 @@ int main2(int argc, char **argv)
 
     return 0;
 }
+
+MediaCore::MediaCore(void)
+{
+
+}
+
+MediaCore::~MediaCore(void)
+{
+
+}
+
+void MediaCore::PreInit()
+{
+
+}
+
+void MediaCore::Init(HWND wnd)
+{
+	this->m_hwnd = wnd;
+
+}
+
+void MediaCore::init_opts()
+{
+	av_dict_set(&sws_dict, "flags", "bicubic", 0);
+	//av_dict_set(&format_opts, "rtsp_transport", "tcp", 0);
+	//av_dict_set(&format_opts, "buffer_size", "1024000", 0);
+}
+
+void MediaCore::init_dynload()
+{
+	#ifdef _WIN32
+	/* Calling SetDllDirectory with the empty string (but not NULL) removes the
+	* current working directory from the DLL search path as a security pre-caution. */
+	SetDllDirectory(L"");
+#endif
+}
+
+void MediaCore::uninit_opts(void)
+{
+	av_dict_free(&swr_opts);
+	av_dict_free(&sws_dict);
+	av_dict_free(&format_opts);
+	av_dict_free(&codec_opts);
+	av_dict_free(&resample_opts);
+}
+
+void MediaCore::set_log_callback(log_callback cb)
+{
+	av_log_set_flags(AV_LOG_SKIP_REPEATED);
+	av_log_set_level(AV_LOG_WARNING);
+	av_log_set_callback(cb);
+}
+
+void MediaCore::StartPlay(char* url,int rec/*=0*/)
+{
+
+}
+
+void MediaCore::StopPlay()
+{
+
+}
+
+#ifdef CONFIG_AVFILTER
+void MediaCore::set_video_subtitle(const char* text)
+{
+	memset(subtitle, 0, sizeof(subtitle));
+	snprintf(subtitle, sizeof(subtitle), "%s", text);
+
+	if (is == NULL)
+		return;
+
+	is_subtitle_change = 1;
+}
+
+void MediaCore::set_subtitle_font(const char* font_file_path)
+{
+	snprintf(font, sizeof(font), font_file_path);
+
+	if (is == NULL)
+		return;
+	is_subtitle_change = 1;
+}
+
+/*font color value is 000000 ~ FFFFFF*/
+void MediaCore::set_subtitle_font_color(const char* font_color /* = "FFFFFF" */)
+{
+	snprintf(fontcolor, sizeof(fontcolor), font_color);
+
+	if (is == NULL)
+		return;
+	is_subtitle_change = 1;
+}
+
+/*alpha value is 0.0 ~ 1.0*/
+void MediaCore::set_subtitle_font_color_alpha(double alpha /* = 0.9 */)
+{
+	fontcolor_alpha = alpha;
+
+	if (is == NULL)
+		return;
+	is_subtitle_change = 1;
+}
+
+void MediaCore::set_subtitle_font_size(unsigned int size /* = 30 */)
+{
+	fontsize = size;
+
+	if (is == NULL)
+		return;
+	is_subtitle_change = 1;
+}
+#endif
+
+void MediaCore::set_rtsp_buffer_size(const char* size /* = "102400" */)
+{
+	av_dict_set(&format_opts, "buffer_size", size, 0);
+}
+
+/*以tcp方式打开，如果以udp方式打开将tcp替换为udp */
+void MediaCore::set_rtsp_transport(const char* transport /* = "tcp" */)
+{ 
+	av_dict_set(&format_opts, "rtsp_transport", transport, 0);
+}
+
+void MediaCore::set_rtsp_connect_timeout(const char* timeout /*= "15000000"*/)
+{
+	av_dict_set(&format_opts, "stimeout", timeout, 0);
+}
+
+void MediaCore::set_rtsp_max_delay(const char* delay /*= "500000"*/)
+{
+	av_dict_set(&format_opts, "max_delay", delay, 0);
+}
+
+
